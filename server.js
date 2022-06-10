@@ -15,14 +15,15 @@ app.use(cors({
 // Import routes
 const authRoute = require('./routes/auth')
 const mechines = require('./routes/postMechines/postMechine')
-const workers = require('./routes/postWorkers/postWorkers')
+const workers = require('./routes/postWorkers/postWorkers');
+const userRouter = require('./routes/user');
 
 // Middlewares
 // app.use('/api/auth',authRoute);
 app.use('/api/auth',authRoute)
 app.use('/api/mechines',mechines)
 app.use('/api/workers',workers)
-
+app.use('/api/user',userRouter);
 
 
 

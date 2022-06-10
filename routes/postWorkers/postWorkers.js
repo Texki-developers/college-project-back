@@ -12,6 +12,15 @@ router.get('/',async(req,res)=>{
     }
 })
 
+router.get('/category',async(req,res)=>{
+    try {
+        const response = await workerModal.find({},'category')
+        res.send(response)
+    } catch (error) {
+        
+    }
+})
+
 router.post("/create", async (req, res) => {
     const data = req.body;
     console.log(data)
@@ -22,6 +31,16 @@ router.post("/create", async (req, res) => {
       res.send(error);
     }
   });
+
+router.get("/:id",async(req,res)=>{
+    const {id} = req.params
+    try {
+        const response = await workerModal.find({_id:id})
+        res.send(response)
+    } catch (error) {
+        res.send("error")
+    }
+})
 
 
 

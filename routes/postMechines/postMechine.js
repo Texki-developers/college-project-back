@@ -24,6 +24,15 @@ router.post("/create", async (req, res) => {
     }
   });
 
+router.get("/:id",async(req,res)=>{
+    const {id} = req.params
+    try {
+        const response = await mechineModal.find({_id:id})
+        res.send(response)
+    } catch (error) {
+        res.send("error")
+    }
+})
 
 
 module.exports =router

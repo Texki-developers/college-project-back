@@ -1,9 +1,16 @@
 const express = require('express');
 const { default: mongoose } = require('mongoose');
 const app = express();
-const bodyparser = require("body-parser")
-const cors = require("cors")
+const  bodyParser = require('body-parser')
+const cors = require('cors')
 require('dotenv/config')
+
+
+// Configuration
+app.use(bodyParser.json())
+app.use(cors({
+    origin:"*"
+}))
 
 // Import routes
 const authRoute = require('./routes/auth')
@@ -12,13 +19,17 @@ const workers = require('./routes/postWorkers/postWorkers')
 
 // Middlewares
 // app.use('/api/auth',authRoute);
-app.use(cors({
-    origin:"*"
-}))
-app.use(bodyparser.json())
 app.use('/api/auth',authRoute)
 app.use('/api/mechines',mechines)
 app.use('/api/workers',workers)
+
+
+
+
+// Middlewares
+// app.use('/api/auth',authRoute);
+app.use('/api/v1/auth',authRoute)
+
 
 // Start server and listen to port 5000
 app.listen(5000,()=>{
@@ -27,3 +38,4 @@ app.listen(5000,()=>{
         console.log("Database connected successfully");
     })
 })
+

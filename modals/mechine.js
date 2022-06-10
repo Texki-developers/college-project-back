@@ -4,7 +4,7 @@ const schema = mongoose.Schema(
         name:String,
         rent:Number,
         description:String,
-        userId:Number,
+        userId:String,
         location:String,
         phone:Number
     },

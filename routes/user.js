@@ -12,13 +12,21 @@ const authenticateToken = require('../middlewares/authenticateToken');
  *  userId
  * }
  */
-router.get('/machine',authenticateToken,(req,res) => {
+router.get('/ad',authenticateToken,(req,res) => {
     let userId = req.body.userId;
     machine.find({_id:ObjectId(userId)}).then(res => {
-        res.send(200).json(res)
+        worker.find({_id:ObjectId(userId)}).then(response => {
+            res.send(200).json({
+                ...res,
+                ...response
+            })
+        }).catch(err => {
+            res.send(500).json(err);
+        })
     }).catch(err => {
         res.send(500).json(err);
     })
+    
 
 })
 
@@ -29,11 +37,7 @@ router.get('/machine',authenticateToken,(req,res) => {
  */
 router.get('/works',authenticateToken,(req,res) => {
     let userId = req.body.userId;
-    worker.find({_id:ObjectId(userId)}).then(res => {
-        res.send(200).json(res)
-    }).catch(err => {
-        res.send(500).json(err);
-    })
+    
 })
 
 module.exports = router;

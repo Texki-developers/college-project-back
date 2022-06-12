@@ -42,6 +42,16 @@ router.get("/:id",async(req,res)=>{
     }
 })
 
+router.delete('/work/:id',async (req,res) => {
+    const {id} = req.params
+    try{
+        const response = await workerModal.deleteOne({_id:id})
+        res.send(response)
+    }catch(err){
+        res.send("error")
+    }
+})
+
 
 
 module.exports =router

@@ -11,6 +11,19 @@ router.post('/login',(req,res) => {
         .catch(err => res.json(err))
 })
 
+router.post('/admin-signup',(req,res) => {
+    authController.adminSignup()
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+})
+
+router.post('/admin-login',(req,res) => {
+    authController.adminLogin(req.body)
+        .then(data => {
+            res.json(data)
+        }).catch(err => res.json(err))
+})
+
 // ----------------------------SIGNUP
 router.post('/signup',async(req,res) => {
     let {name,password} = req.body

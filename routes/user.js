@@ -12,8 +12,8 @@ const authenticateToken = require('../middlewares/authenticateToken');
  *  userId
  * }
  */
-router.get('/ad',authenticateToken,(req,res) => {
-    let userId = req.body.userId;
+router.get('/ad/:userId',authenticateToken,(req,res) => {
+    let userId = req.params.userId;
     machine.find({_id:ObjectId(userId)}).then(res => {
         worker.find({_id:ObjectId(userId)}).then(response => {
             res.send(200).json({

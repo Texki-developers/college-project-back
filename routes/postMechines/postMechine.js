@@ -33,6 +33,14 @@ router.get("/:id",async(req,res)=>{
         res.send("error")
     }
 })
-
+router.delete('/machine/:id',async (req,res) => {
+  const {id} = req.params
+  try{
+      const response = await mechineModal.deleteOne({_id:id})
+      res.send(response)
+  }catch(err){
+      res.send("error")
+  }
+})
 
 module.exports =router

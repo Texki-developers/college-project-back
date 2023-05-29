@@ -12,7 +12,7 @@ const authenticateToken = require('../middlewares/authenticateToken');
  *  userId
  * }
  */
-router.get('/ad/:userId',authenticateToken,(req,res) => {
+router.get('/ad/:userId',(req,res) => {
     let userId = req.params.userId;
     machine.find({_id:ObjectId(userId)}).then(res => {
         worker.find({_id:ObjectId(userId)}).then(response => {
@@ -35,7 +35,7 @@ router.get('/ad/:userId',authenticateToken,(req,res) => {
  *  userId
  * }
  */
-router.get('/works',authenticateToken,(req,res) => {
+router.get('/works',(req,res) => {
     let userId = req.body.userId;
     
 })

@@ -12,7 +12,7 @@ module.exports = {
             })
             try{
                 const check = await user.save()
-                console.log(check);
+                console.log({check});
                 resolve(check)
             }catch(err){
                 reject(err)
@@ -43,14 +43,16 @@ module.exports = {
             if(data[0]){
                 bcrypt.compare(password,data[0].password,(err,res)=>{
                     if(err){
-                        reject({status:'error',message: err.toString})
+                        return reject({status:'error',message: err.toString})
                     }
                     if(res){
-                        resolve({status:'ok',message:'Login success',token:generateToken(data),userId:data[0]._id})
+                        return resolve({status:'ok',message:'Login success',token:generateToken({user: data.name}),userId:data[0]._id})
                     }else{
-                        reject({status:'error',message:"Password not match"})
+                        return reject({status:'error',message:"Password not match"})
                     }
                 })
+            }else{
+                return reject({status:'error',message:"User not found"})
             }
         })
     },

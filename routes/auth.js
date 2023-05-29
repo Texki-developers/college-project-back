@@ -6,6 +6,7 @@ const authController = require('../controllers/auth');
 const generateToken = require('../utils/generateToken');
 
 router.post('/login',(req,res) => {
+    console.log('In the route',req.body)
     authController.login(req.body)
         .then(data => {res.json(data)})
         .catch(err => res.json(err))
@@ -27,6 +28,7 @@ router.post('/admin-login',(req,res) => {
 // ----------------------------SIGNUP
 router.post('/signup',async(req,res) => {
     let {name,password} = req.body
+    console.log(req.body);
     if(name.length < 3 || password.length < 8){
         res.json({status:'error',message: "Username or password doesn't satisfy requirements"})
     }else{

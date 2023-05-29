@@ -3,6 +3,7 @@ const { default: mongoose } = require('mongoose');
 const app = express();
 const  bodyParser = require('body-parser')
 const cors = require('cors')
+const fileUpload = require('express-fileupload')
 require('dotenv/config')
 
 
@@ -13,6 +14,7 @@ app.use(cors({
 }))
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(express.json({ limit: "50mb" }));
+app.use(express.static("public"));
 
 // Import routes
 const authRoute = require('./routes/auth')
@@ -27,6 +29,11 @@ app.use('/api/mechines',mechines)
 app.use('/api/workers',workers)
 app.use('/api/user',userRouter);
 
+
+app.use(fileUpload({
+    useTempFiles: true,
+    tempFileDir: '/tmp/'
+  }));
 
 
 // Middlewares
